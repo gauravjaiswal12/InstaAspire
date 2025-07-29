@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f341f812-f8d2-4b44-9b11-76c069b9cd2e" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="tsconfig.json" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2xSOZjbGhrhkMZPTP5jEM92g6gT" />
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showScratchesAndConsoles" value="false" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "javascript.nodejs.core.library.configured.version": "22.16.0",
+    "javascript.nodejs.core.library.typings.version": "22.16.5",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "E:/instagram_clone",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "C:/Program Files/nodejs/node",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "vcs.Git",
+    "settings.editor.splitter.proportion": "0.26197758",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2025.1.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
+        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+        <entry key="com.intellij.reactbuddy.storybook" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-WS-251.27812.50" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f341f812-f8d2-4b44-9b11-76c069b9cd2e" name="Changes" comment="" />
+      <created>1747928065680</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1747928065680</updated>
+      <workItem from="1747928066795" duration="19000" />
+      <workItem from="1747928091542" duration="9652000" />
+      <workItem from="1748106842580" duration="5450000" />
+      <workItem from="1748136401813" duration="182000" />
+      <workItem from="1748136688397" duration="12353000" />
+      <workItem from="1748156816072" duration="37000" />
+      <workItem from="1748156865372" duration="188000" />
+      <workItem from="1748157066838" duration="13538000" />
+      <workItem from="1748283709159" duration="22540000" />
+      <workItem from="1748601730799" duration="149000" />
+      <workItem from="1748601901570" duration="4762000" />
+      <workItem from="1748779505828" duration="12239000" />
+      <workItem from="1748849220984" duration="9000" />
+      <workItem from="1749050149747" duration="521000" />
+      <workItem from="1749050755645" duration="4000" />
+      <workItem from="1749050770505" duration="98000" />
+      <workItem from="1749050879714" duration="134000" />
+      <workItem from="1749054835146" duration="3259000" />
+      <workItem from="1749024189660" duration="8741000" />
+      <workItem from="1749038110771" duration="38852000" />
+      <workItem from="1749218099515" duration="5404000" />
+      <workItem from="1749382196980" duration="4849000" />
+      <workItem from="1749387093452" duration="6324000" />
+      <workItem from="1749470497962" duration="404000" />
+      <workItem from="1749470975172" duration="678000" />
+      <workItem from="1749471958230" duration="104000" />
+      <workItem from="1749472090662" duration="7150000" />
+      <workItem from="1749482143523" duration="401000" />
+      <workItem from="1749482558175" duration="3540000" />
+      <workItem from="1749738135421" duration="22804000" />
+      <workItem from="1749837788475" duration="15612000" />
+      <workItem from="1750173061333" duration="96000" />
+      <workItem from="1750173186933" duration="1463000" />
+      <workItem from="1750328776147" duration="25612000" />
+      <workItem from="1750511897203" duration="4172000" />
+      <workItem from="1750693486136" duration="41000" />
+      <workItem from="1750693545254" duration="4952000" />
+      <workItem from="1750781234600" duration="5851000" />
+      <workItem from="1750954014322" duration="124000" />
+      <workItem from="1750954200333" duration="680000" />
+      <workItem from="1752843579233" duration="5097000" />
+      <workItem from="1752862744086" duration="285000" />
+      <workItem from="1752863053554" duration="189000" />
+      <workItem from="1752863275767" duration="39275000" />
+      <workItem from="1753416184621" duration="5208000" />
+      <workItem from="1753539453106" duration="50000" />
+      <workItem from="1753539509200" duration="469000" />
+      <workItem from="1753540039094" duration="1214000" />
+      <workItem from="1753541284711" duration="4000" />
+      <workItem from="1753541610471" duration="1076000" />
+      <workItem from="1753546968223" duration="418000" />
+      <workItem from="1753548359872" duration="31306000" />
+      <workItem from="1753722600619" duration="1822000" />
+      <workItem from="1753761297285" duration="12000" />
+      <workItem from="1753774953026" duration="996000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
