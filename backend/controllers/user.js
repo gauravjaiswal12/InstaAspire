@@ -4,6 +4,8 @@ const Post=require('../models/Post');
 const jwt = require('jsonwebtoken');
 const getDataUri = require("../utils/datauri");
 const {uploadImageToCloudinary} = require("../utils/uploadMediaToCloudinary");
+const mongoose = require('mongoose');
+require("dotenv").config();
 const cloudinary = require('cloudinary').v2;
 
 exports.register=async (req,res)=>{
@@ -202,28 +204,92 @@ exports.editProfile=async (req,res)=>{
     }
 }
 
-//get suggestedUser
+
+//suggested user new
 exports.getSuggestedUser=async (req,res)=>{
-    try{
-        const suggestedUsers=await User.find({_id:{$ne:req.id}}).select("-password");
-        if(!suggestedUsers){
-            return res.status(401).json({
-                message:"Currently suggested user does not exist",
-                success:false,
-            })
+    try {
+        const userId = req.id;
+        const user = await User.findById(userId).select('following followers').lean();
+
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found." });
         }
+
+        const myFollowing = user.following || [];
+        const myFollowers = user.followers || [];
+        let suggestions = [];
+
+        // --- THIS IS THE NEW LOGIC ---
+        // Check if the user is following anyone.
+        if (myFollowing.length > 0) {
+            // --- SCENARIO A: USER IS FOLLOWING PEOPLE ---
+            // Run the powerful "friends of friends" algorithm.
+            console.log(`[DEBUG] User ${userId} is following people. Running personalized suggestions.`);
+            const idsToExclude = [
+                ...myFollowing,
+                ...myFollowers,
+                new mongoose.Types.ObjectId(userId)
+            ];
+
+            suggestions = await User.aggregate([
+                { $match: { _id: { $in: myFollowing } } },
+                { $lookup: { from: 'users', localField: 'following', foreignField: '_id', as: 'friendFriends' } },
+                { $unwind: '$friendFriends' },
+                { $match: { 'friendFriends._id': { $nin: idsToExclude } } },
+                { $group: { _id: '$friendFriends._id', mutuals: { $sum: 1 } } },
+                { $limit:10},
+                { $sort: { mutuals: -1 } },
+                { $lookup: { from: 'users', localField: '_id', foreignField: '_id', as: 'userDetails' } },
+                { $unwind: '$userDetails' },
+                { $project: {
+                        _id: '$userDetails._id',
+                        username: '$userDetails.username',
+                        profilePicture: '$userDetails.profilePicture',
+                        bio:1,
+                        mutuals: 1
+                    }}
+            ]);
+
+        }
+        // --- THIS IS THE FIX (THE FALLBACK LOGIC) ---
+        // If the user is new OR if the personalized algorithm returned no results...
+        if (suggestions.length === 0) {
+            console.log(`[DEBUG] No personalized suggestions found for ${userId}. Falling back to popular users.`);
+
+            const idsToExclude = [
+                ...myFollowing, // Still exclude people we just followed
+                new mongoose.Types.ObjectId(userId)
+            ];
+
+            suggestions = await User.aggregate([
+                { $match: { _id: { $nin: idsToExclude } } },
+                { $addFields: { followerCount: { $size: { "$ifNull": ["$followers", []] } } } },
+                { $sort: { followerCount: -1 } },
+                { $limit: 10 },
+                { $project: {
+                        _id: 1,
+                        username: 1,
+                        profilePicture: 1,
+                        followerCount: 1
+                    }}
+            ]);
+        }
+
+
         return res.status(200).json({
-            success:true,
-            users:suggestedUsers
-        })
-    }catch(err){
-        console.log(err);
+            success: true,
+            users: suggestions
+        });
+
+    }catch(e){
+        console.log(e);
         return res.status(500).json({
             success:false,
-            message: "Suggested User not found due to network error",
+            message:"Something went wrong while getting suggested user",
         })
     }
 }
+
 exports.followOrUnfollow=async (req,res)=>{
     try{
         const myId=req.id;

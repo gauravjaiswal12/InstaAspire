@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f341f812-f8d2-4b44-9b11-76c069b9cd2e" name="Changes" comment="" />
+    <list default="true" id="f341f812-f8d2-4b44-9b11-76c069b9cd2e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/SuggestedUsers.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SuggestedUsers.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/hooks/useGetSuggestedUser.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/hooks/useGetSuggestedUser.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/redux/authSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/authSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/operations/userOperations.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/operations/userOperations.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,6 +46,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "ignore.virus.scanning.warn.message": "true",
     "javascript.nodejs.core.library.configured.version": "22.16.0",
     "javascript.nodejs.core.library.typings.version": "22.16.5",
@@ -50,8 +58,9 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_interpreter_path": "C:/Program Files/nodejs/node",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "vcs.Git",
+    "settings.editor.selected.configurable": "advanced.settings",
     "settings.editor.splitter.proportion": "0.26197758",
+    "to.speed.mode.migration.done": "true",
     "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2025.1.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
@@ -135,10 +144,18 @@
       <workItem from="1753722600619" duration="1822000" />
       <workItem from="1753761297285" duration="12000" />
       <workItem from="1753774953026" duration="996000" />
+      <workItem from="1753776002845" duration="11547000" />
+      <workItem from="1753976917564" duration="762000" />
+      <workItem from="1754066832158" duration="5798000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit: Add project structure and files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit: Add project structure and files" />
+    <option name="LAST_CHUNK_COMMIT_MESSAGE" value="Initial commit: Add project structure and files" />
   </component>
 </project>
