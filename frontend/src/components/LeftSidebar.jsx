@@ -65,6 +65,8 @@ const LeftSidebar = () => {
             navigate('/chat');
         }else if(text==='Reels'){
             navigate('/viewReels');
+        }else if(text==='Search'){
+            navigate('/search');
         }
     }
 
@@ -113,6 +115,7 @@ const LeftSidebar = () => {
     }
 
     return (
+
        <div className='fixed top-0 z-10 left-0 px-4 border-r border-gray-300 w-[16%] h-screen'>
            <div className='flex flex-col gap-4 py-4'>
                {/*//use instagram logo after*/}

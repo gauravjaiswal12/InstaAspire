@@ -237,8 +237,11 @@ exports.getSuggestedUser=async (req,res)=>{
                 { $unwind: '$friendFriends' },
                 { $match: { 'friendFriends._id': { $nin: idsToExclude } } },
                 { $group: { _id: '$friendFriends._id', mutuals: { $sum: 1 } } },
-                { $limit:10},
+                // --- FIX #1: The SORT must come BEFORE the LIMIT ---
+                // We need to sort all potential suggestions by mutuals first,
+                // and THEN take the top 10.
                 { $sort: { mutuals: -1 } },
+                { $limit: 10 },
                 { $lookup: { from: 'users', localField: '_id', foreignField: '_id', as: 'userDetails' } },
                 { $unwind: '$userDetails' },
                 { $project: {
@@ -257,7 +260,8 @@ exports.getSuggestedUser=async (req,res)=>{
             console.log(`[DEBUG] No personalized suggestions found for ${userId}. Falling back to popular users.`);
 
             const idsToExclude = [
-                ...myFollowing, // Still exclude people we just followed
+                ...myFollowing,
+                ...myFollowers,
                 new mongoose.Types.ObjectId(userId)
             ];
 
@@ -270,7 +274,8 @@ exports.getSuggestedUser=async (req,res)=>{
                         _id: 1,
                         username: 1,
                         profilePicture: 1,
-                        followerCount: 1
+                        followerCount: 1,
+                        bio:1,
                     }}
             ]);
         }
@@ -338,6 +343,41 @@ exports.followOrUnfollow=async (req,res)=>{
         return res.status(500).json({
             success:false,
             message:"Follow Or Unfollow , Internal Server Error",
+        })
+    }
+}
+
+exports.searchUser=async (req,res)=>{
+    try{
+        const searchQuery = req.query.query;
+        const userId = req.id;
+        if (!searchQuery) {
+            console.log("the search query was empty");
+            return res.status(200).json({ success: true, users: [] });
+        }
+
+        //  Building the query
+        // We use the $or operator to find a match in EITHER the username OR the email field.
+        const users = await User.find({
+            $or: [
+                { username: { $regex: searchQuery, $options: 'i' } },
+                { email: { $regex: searchQuery, $options: 'i' } }
+            ],
+            // We still exclude the current user from the results
+            _id: { $ne: userId }
+        })
+            .select("username profilePicture");
+
+        return res.status(200).json({
+            success: true,
+            users: users,
+            message:"finished searching users",
+        });
+    }catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            success:false,
+            message:"Something went wrong while searching user",
         })
     }
 }

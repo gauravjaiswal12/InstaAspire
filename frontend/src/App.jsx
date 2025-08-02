@@ -14,6 +14,7 @@ import {setMessagesNotification, setOnlineUsers} from "@/redux/chatSlice.js";
 import {setLikeNotification} from "@/redux/rtnSlice.js";
 import ProtectedRoutes from "@/components/ProtectedRoutes.jsx";
 import ReelsFeed from "@/components/ReelsFeed.jsx";
+import SearchUser from "@/components/SearchUser.jsx";
 
 function App() {
     const {user}=useSelector((state)=>state.auth);
@@ -59,6 +60,7 @@ function App() {
                 <Route path="/account/edit" element={<ProtectedRoutes><EditProfile /></ProtectedRoutes>}/>
                 <Route path="/viewReels" element={<ProtectedRoutes><ReelsFeed/></ProtectedRoutes>}/>
                 <Route path="/chat" element={<ProtectedRoutes><ChatPage /></ProtectedRoutes>}/>
+                <Route path="/Search" element={<ProtectedRoutes><SearchUser/></ProtectedRoutes>}/>
             </Route>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/login" element={<Login/>}/>
