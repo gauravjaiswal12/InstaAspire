@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Dialog,DialogContent,DialogTrigger } from "@/components/ui/dialog"
+import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {NavLink} from "react-router-dom";
 import {MoreHorizontal} from "lucide-react";
@@ -50,6 +50,9 @@ const CommentDialog = ({open,setOpen}) => {
            {/*set selected post is done null when clicked outside*/}
            <DialogContent onInteractOutside={()=>{setSelectedPost(null)
                setOpen(false)}} className='max-w-5xl p-0 flex flex-col '>
+               <DialogHeader>
+                   <DialogTitle className="sr-only">Options</DialogTitle>
+               </DialogHeader>
                <div className='flex flex-1'>
                    <div className='w-1/2'>
                        <img src={selectedPost?.image} alt="post_img" className='w-full h-full object-cover rounded-l-lg'/>

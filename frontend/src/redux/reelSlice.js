@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from "axios";
+import {toast} from "sonner";
 // Assume you have an api.js file for making network requests
 // import * as api from '../api/reelsAPI';
 
@@ -102,6 +103,23 @@ export const unlikeReel = createAsyncThunk(
     }
 );
 
+//handling the comments on a reel
+export const commentOnReel = createAsyncThunk(
+    'reels/commentOnReel',
+    // The thunk receives an object with the reelId and the comment text
+    async ({ reelId, comment }, { rejectWithValue }) => {
+        try {
+            const res = await axios.post(
+                `http://localhost:8000/api/v1/reel/${reelId}/reelComment`,
+                { comment},
+                { withCredentials: true }
+            );
+            return res.data.comment;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
 
 //================================================================
 // 2. THE SLICE DEFINITION
@@ -218,7 +236,19 @@ export const reelSlice = createSlice({
                 };
                 state.feed.reels.forEach(updateReel);
                 state.profile.reels.forEach(updateReel);
-            });
+            })
+            .addCase(commentOnReel.fulfilled, (state, action) => {
+                const newComment = action.payload;
+
+                //Get the ID of the reel from the thunk's arguments.
+                const { reelId } = action.meta.arg;
+                const reelToUpdate = state.feed.reels.find(reel => reel._id === reelId);
+
+                if (reelToUpdate) {
+                    reelToUpdate.comments.unshift(newComment);
+                }
+            })
+
     },
 
 });

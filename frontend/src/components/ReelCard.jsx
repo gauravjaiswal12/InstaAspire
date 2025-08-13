@@ -5,12 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { markReelAsViewed, likeReel, unlikeReel } from '../redux/reelSlice';
 import VideoPlayer from "@/services/videoPlayer/hls.jsx";
 import {Heart, MessageCircle, Send} from "lucide-react";
+import {Dialog} from "@/components/ui/dialog.jsx";
+import CommentsDialog from "@/components/CommentsDialog.jsx";
 
 function ReelCard({ reel }) {
     const dispatch = useDispatch();
     const cardRef = useRef(null); // Ref for the whole card
     const viewTimerRef = useRef(null);
     const [hasBeenMarked, setHasBeenMarked] = useState(false);
+    const [showComments, setShowComments] = useState(false);
 
     // Get the logged-in user's ID to handle likes correctly
     const { user } = useSelector(state => state.auth);
@@ -58,6 +61,10 @@ function ReelCard({ reel }) {
             dispatch(likeReel({ reelId: reel._id, userId: user._id }));
         }
     };
+    const handleCommentClick = (e) => {
+        e.stopPropagation(); // Prevent the click from affecting the video player
+        setShowComments(true); // Open the dialog
+    };
 
     return (
         <div className="reel-card w-full h-full bg-black rounded-xl overflow-hidden relative shadow-2xl " ref={cardRef}>
@@ -103,9 +110,9 @@ function ReelCard({ reel }) {
                 </div>
 
                 {/* Comment Button */}
-                <div className="flex flex-col items-center text-center">
-                    <button className="transform transition-transform active:scale-125" aria-label="View comments">
-                        <MessageCircle size={32} color="#FFFFFF" className="drop-shadow-lg" />
+                <div className="flex flex-col items-center text-center " >
+                    <button onClick={handleCommentClick} className="transform transition-transform active:scale-125" aria-label="View comments">
+                        <MessageCircle size={32} color="#FFFFFF" className="drop-shadow-lg" onClick={()=>setShowComments(!showComments)} />
                     </button>
                     <span className="text-sm font-bold drop-shadow-md">{reel.comments?.length || 0}</span>
                 </div>
@@ -117,6 +124,14 @@ function ReelCard({ reel }) {
                     </button>
                 </div>
             </div>
+            {/* 4. Render the dialog and pass it the state and the reel ID */}
+            <CommentsDialog
+                src={reel.videoUrl}
+                reel={reel}
+                reelId={reel._id}
+                open={showComments}
+                onOpenChange={setShowComments}
+            />
         </div>
     );
 }

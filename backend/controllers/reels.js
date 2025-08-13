@@ -175,122 +175,6 @@ exports.getReelsByUserId=async (req,res)=>{
     }
 }
 
-//the Hacker News Algorithm
-// exports.getBestReels = async (req, res) => {
-//     try {
-//         // --- 1. SETUP & AUTHENTICATION ---
-//         const userId = req.id;
-//         const objectIdUserId =new mongoose.Types.ObjectId(userId);
-//
-//         // --- 2. PAGINATION PARAMETERS ---
-//         const page = parseInt(req.query.page) || 1;
-//         const limit = parseInt(req.query.limit) || 10;
-//         const skip = (page - 1) * limit;
-//
-//         // --- 3. ALGORITHM CONSTANTS ---
-//         const GRAVITY = 1.8;
-//         const PERSONALIZATION_MULTIPLIER = 5;
-//
-//         // --- 4. DATA FETCHING (CONCURRENT) ---
-//         // Fetch user's details and total count from the 'Reel' collection
-//         const [user, totalReelsCount] = await Promise.all([
-//             User.findById(userId).select('following viewedReels').lean(),
-//             Reel.countDocuments() // <<< CHANGE: Counting documents in 'Reel' collection
-//         ]);
-//
-//         const followedAuthors = user ? user.following : [];
-//         const viewedReelIds = user ? user.viewedReels : [];
-//
-//         // --- 5. THE CORE AGGREGATION PIPELINE on the 'Reel' collection ---
-//         const reels = await Reel.aggregate([ // <<< CHANGE: Aggregating on the 'Reel' model
-//             // STAGE 0: FILTER
-//             {
-//                 $match: {
-//                     _id: { $nin: viewedReelIds }
-//                 }
-//             },
-//
-//             // STAGE I: CALCULATE ENGAGEMENT & TIME
-//             {
-//                 $addFields: {
-//                     points: { $size: { "$ifNull": ["$likes", []] } },
-//                     ageInHours: { $divide: [{ $subtract: [new Date(), "$createdAt"] }, 3600000] }
-//                 }
-//             },
-//
-//             // STAGE II: CALCULATE HACKER NEWS SCORE
-//             {
-//                 $addFields: {
-//                     hackerNewsScore: {
-//                         $divide: [
-//                             { $max: [0, { $subtract: ["$points", 1] }] },
-//                             { $pow: [{ $max: [0.1, { $add: ["$ageInHours", 2] }] }, GRAVITY] }
-//                         ]
-//                     }
-//                 }
-//             },
-//
-//             // STAGE III: APPLY PERSONALIZATION BOOST
-//             {
-//                 $addFields: {
-//                     finalScore: {
-//                         $multiply: [
-//                             "$hackerNewsScore",
-//                             { $cond: { if: { $in: ["$author", followedAuthors] }, then: PERSONALIZATION_MULTIPLIER, else: 1 } }
-//                         ]
-//                     }
-//                 }
-//             },
-//
-//             // STAGE IV: SORT AND PAGINATE
-//             { $sort: { finalScore: -1 } },
-//             { $skip: skip },
-//             { $limit: limit },
-//
-//             // STAGE V: POPULATE AUTHOR DETAILS (No change here, this is correct)
-//             { $lookup: { from: 'users', localField: 'author', foreignField: '_id', as: 'authorDetails' } },
-//             { $unwind: { path: '$authorDetails', preserveNullAndEmptyArrays: true } },
-//
-//             // STAGE VI: PROJECT FINAL, CLEAN FIELDS
-//             {
-//                 $project: {
-//                     _id: 1,
-//                     videoUrl: 1,
-//                     thumbnailUrl: 1, // Including fields from your Reel schema
-//                     caption: 1,
-//                     likes: 1, // Sending the full likes array for now
-//                     viewCount: 1,
-//                     audio: 1,      // Including audio object
-//                     createdAt: 1,
-//                     author: { _id: "$authorDetails._id", username: "$authorDetails.username", profilePicture: "$authorDetails.profilePicture" },
-//                     isLikedByCurrentUser: { $in: [objectIdUserId, { "$ifNull": ["$likes", []] }] }
-//                 }
-//             }
-//         ]);
-//
-//         // --- 6. CONSTRUCT AND SEND THE FINAL RESPONSE ---
-//         return res.status(200).json({
-//             success: true,
-//             data: reels,
-//             pagination: {
-//                 currentPage: page,
-//                 limit: limit,
-//                 hasNextPage: (skip + reels.length) < totalReelsCount
-//             }
-//         });
-//
-//     } catch (error) {
-//         console.log(error);
-//         return res.status(500).json({
-//             success: false,
-//             message: "An internal server error occurred while fetching reels."
-//             }
-//         )
-//     }
-// };
-
-// In your backend/controllers/reels.js
-
 exports.getBestReels = async (req, res) => {
     try {
         // --- 1. SETUP & AUTHENTICATION ---
@@ -380,6 +264,35 @@ exports.getBestReels = async (req, res) => {
                     "authorDetails._id": { $exists: true, $ne: null }
                 }
             },
+            // --- THIS IS THE NEW PART: POPULATE COMMENTS AND THEIR AUTHORS ---
+            // STAGE 7: Look up the comments for each reel
+            {
+                $lookup: {
+                    from: 'comments', // The name of your comments collection
+                    localField: 'comments', // The array of comment IDs in the Reel model
+                    foreignField: '_id', // The _id in the Comment model
+                    as: 'populatedComments',
+                    // This is an advanced feature: a nested pipeline to populate the author of EACH comment
+                    pipeline: [
+                        // 1. Sort comments so the newest are first
+                        { $sort: { createdAt: -1 } },
+                        // 2. Look up the author for each comment
+                        { $lookup: { from: 'users', localField: 'author', foreignField: '_id', as: 'authorDetails' } },
+                        { $unwind: '$authorDetails' },
+                        // 3. Shape the comment object cleanly
+                        { $project: {
+                                _id: 1,
+                                text: 1,
+                                createdAt: 1,
+                                author: {
+                                    _id: '$authorDetails._id',
+                                    username: '$authorDetails.username',
+                                    profilePicture: '$authorDetails.profilePicture'
+                                }
+                            }}
+                    ]
+                }
+            },
             // STAGE VI: PROJECT FINAL, CLEAN FIELDS
             {
                 $project: {
@@ -391,6 +304,8 @@ exports.getBestReels = async (req, res) => {
                     viewCount: 1,
                     audio: 1,
                     createdAt: 1,
+                    // Use the newly populated comments array
+                    comments: "$populatedComments",
                     author: { _id: "$authorDetails._id", username: "$authorDetails.username", profilePicture: "$authorDetails.profilePicture" },
                     isLikedByCurrentUser: { $in: [objectIdUserId, { "$ifNull": ["$likes", []] }] }
                 }
@@ -588,6 +503,7 @@ exports.addReelComment=async (req,res)=>{
     }
 }
 //exports getComment
+//this is flawed since how come the post:reelId wrong
 exports.getCommentOnReels=async (req,res)=>{
     try{
         const reelId=req.params.id;
