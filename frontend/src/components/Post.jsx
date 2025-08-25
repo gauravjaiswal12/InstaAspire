@@ -104,14 +104,14 @@ const Post = ({post}) => {
     }
 
     return (
-        <div className='my-8 w-full max-w-sm mx-auto '>
-            <div className='flex justify-between items-center'>
-                <div className='flex items-center gap-2'>
+        <div className='my-8 max-w-110 mx-auto outline:2px solid #3BADF8 rounded-lg scale-98 p-4 shadow-lg hover:scale-100 transition-all duration-300'>
+            <div className='flex justify-between items-center rounded-lg'>
+                <div className='flex items-center gap-3'>
                     <Avatar>
                         <AvatarImage src={post.author?.profilePicture} alt="post_image"/>
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
-                    <div className='flex items-center gap-3'>
+                    <div className='flex items-center gap-5'>
                         <h1>{post.author?.username}</h1>
                         {
                             user?._id===post.author._id &&  <Badge variant="secondary">Author</Badge>
@@ -138,13 +138,12 @@ const Post = ({post}) => {
                     </DialogContent>
                 </Dialog>
             </div>
-            <div className="rounded-sm my-2 w-full aspect-square">
+            <div className=" w-full aspect-square  rounded-lg my-5 w-full overflow-hidden h-110 w-110 shadow-sm hover:shadow-md transition-shadow duration-200">
                 {post.mediaType === "video" ? (
-                         <VideoPlayer src={post.mediaUrl?.hls || post.mediaUrl} />
-
+                   <VideoPlayer  src={post.mediaUrl?.hls || post.mediaUrl} />
                 ) : (
                     <img
-                        className="w-full h-full object-cover rounded-sm"
+                        className="w-full h-full object-cover rounded-lg"
                         src={post.mediaUrl}
                         alt="post_image"
                     />
@@ -153,32 +152,32 @@ const Post = ({post}) => {
 
 
 
-            <div className='flex items-center justify-between my-2'>
-                <div className='flex items-center gap-3 '>
+            <div className='flex items-center justify-between mt-4 mb-2'>
+                <div className='flex items-center gap-4 '>
                     {
-                        liked ? <FaHeart onClick={likeOrDislikeHandler} size='22px' className='cursor-pointer text-red-600'/> : <FaRegHeart onClick={likeOrDislikeHandler} size='22px' className='cursor-pointer hover:text-gray-600'/>
+                        liked ? <FaHeart onClick={likeOrDislikeHandler} size='22px' className='cursor-pointer text-red-600 hover:scale-110 transition-all duration-300'/> : <FaRegHeart onClick={likeOrDislikeHandler} size='22px' className='cursor-pointer hover:text-gray-600 hover:scale-110 transition-all duration-300'/>
                     }
 
                     <MessageCircle onClick={()=>{
                         dispatch(setSelectedPost(post))
-                        setOpen(true)}} className='cursor-pointer hover:text-gray-600'/>
-                    <Send className='cursor-pointer hover:text-gray-600'/>
+                        setOpen(true)}} className='cursor-pointer hover:text-gray-600 hover:scale-110 transition-all duration-300'/>
+                    <Send className='cursor-pointer hover:text-gray-600 hover:scale-110 transition-all duration-300'/>
                 </div>
-                <Bookmark onClick={bookmarkHandler} className='cursor-pointer hover:text-gray-600'/>
+                <Bookmark onClick={bookmarkHandler} className='cursor-pointer hover:text-gray-600 hover:scale-110 transition-all duration-300'/>
             </div>
-            <span className='font-medium block mb2'>{postLike} likes</span>
+            <span className='font-medium block mb-1 '>{postLike} likes</span>
             <p>
-                <span className='font-medium mr-2'>{post.author?.username}</span>
+                <span className='font-medium mr-2 hover:text-blue-900'>{post.author?.username}</span>
                 {post.caption}
             </p>
             <span onClick={()=>{
                 dispatch(setSelectedPost(post))
-                setOpen(true)}} className='cursor-pointer text-sm text-gray-400'>
+                setOpen(true)}} className='cursor-pointer text-sm text-gray-400 mt-1'>
                {/*it is not updating in real time*/}
                 {post.comments.length? `View all ${post.comments.length} comments` : `No comments Yet`}
            </span>
             <CommentDialog open={open} setOpen={setOpen}/>
-            <div className='flex items-center justify-between'>
+            <div className='flex items-center justify-between mt-1'>
                 <input type='text'  placeholder='Add a comment...' value={text} onChange={changeEventHandler} className='outline-none text-sm w-full'/>
                 {
                     text && <span onClick={commentHandler} className='text-[#3BADF8] cursor-pointer'>Post</span>

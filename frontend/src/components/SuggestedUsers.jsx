@@ -12,10 +12,10 @@ const SuggestedUsers = () => {
         dispatch(followUser(id));
     }
   return (
-    <div className='my-10'>
+    <div className='my-5'>
         <div className='flex items-center justify-between text-sm' >
-            <h1 className='font-semibold text-gray-600'>Suggested for you</h1>
-            <span className='font-medium cursor-pointer'>see all</span>
+            <h1 className='font-semibold text-gray-600'>Suggested Users</h1>
+            <span className='font-medium cursor-pointer'>See all</span>
         </div>
         {
             suggestedUsers?.map((user)=>{
@@ -30,7 +30,9 @@ const SuggestedUsers = () => {
                             </NavLink>
                             <div>
                                 <h1 className="font-semibold text-sm"><NavLink to={`/profile/${user?._id}`}>{user?.username}</NavLink></h1>
-                                <span className='text-grey-600 text-sm'>{user?.bio || 'Bio here...'}</span>
+                                {
+                                    user?.bio && <span className='text-grey-600 text-sm'>{user?.bio || 'Bio here...'}</span>
+                                }
                             </div>
                         </div>
                         <span className='text-[#3BADF8] text-xs font-bold cursor-pointer hover:text-[#3495d6]' onClick={()=>handleFollow(user?._id)}>Follow</span>

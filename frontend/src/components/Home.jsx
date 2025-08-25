@@ -12,11 +12,14 @@ const Home = () => {
 
     return (
        <div className='flex'>
-           <div className="flex-grow">
+           <div className="flex-grow ">
                 <Feed/>
-               <Outlet/>
+                <Outlet/>
            </div>
-           <RightSidebar/>
+           <div className="hidden lg:block lg:h-screen">
+               <RightSidebar/>
+           </div>
+           {/*<RightSidebar/>*/}
        </div>
     );
 };

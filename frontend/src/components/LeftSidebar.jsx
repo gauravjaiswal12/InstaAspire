@@ -17,6 +17,7 @@ import {Button} from "@/components/ui/button.jsx";
 import {clearLikeNotification} from "@/redux/rtnSlice.js";
 import {clearMsgNotification} from "@/redux/chatSlice.js";
 import CreateReels from "@/components/CreateReels.jsx";
+import PixelVerseLogo from "./PixelVerseLogo.jsx"
 
 const LeftSidebar = () => {
     const navigate=useNavigate();
@@ -116,15 +117,24 @@ const LeftSidebar = () => {
 
     return (
 
-       <div className='fixed top-0 z-10 left-0 px-4 border-r border-gray-300 w-[16%] h-screen'>
+       <div className='fixed top-0 z-10 left-0 px-4 pr-4 lg:border-r border-gray-300 lg:w-[16%]  h-screen'>
            <div className='flex flex-col gap-4 py-4'>
                {/*//use instagram logo after*/}
-               <h1 className='my-8 pl-3 font-bold text-xl'>LOGO</h1>
+               <h1 className='my-5 pl-3 font-bold text-2xl relative group cursor-pointer select-none'>
+
+                   <span className='relative z-10 bg-gradient-to-r from-blue-700 via-purple-900 to-pink-500 bg-clip-text text-transparent bg-300% animate-gradient-x font-extrabold tracking-wide drop-shadow-lg hover:scale-110 transition-all duration-300'>
+                        <span>
+                            <PixelVerseLogo className={"w-10 h-15 hover:scale-105 transition-transform duration-300"}/>
+                        </span>
+                       PIXEL-VERSE
+                   </span>
+               </h1>
                <div>
                    {
                        sidebarItems.map((item,index)=>(
-                          <div key={index} onClick={()=>sidebarHandler(item.text)} className='flex items-center relative hover:bg-gray-100 cursor-pointer rounded-lg p-3 gap-3 my-3'>
-                              {item.icon}
+                          <div key={index} onClick={()=>sidebarHandler(item.text)} className='flex items-center relative hover:bg-gray-300 hover:scale-110 transition-all duration-300 cursor-pointer rounded-lg p-3 gap-3 my-3'>
+                              <span className="hidden md:inline">{item.icon}</span>
+
                               <span>{item.text}</span>
                               {
                                   item.text==='Notifications' && likeNotification?.length>0 && (

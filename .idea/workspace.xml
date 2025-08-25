@@ -5,13 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f341f812-f8d2-4b44-9b11-76c069b9cd2e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/controllers/reels.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/reels.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/CommentDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/CommentDialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/MainLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/MainLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/ReelCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ReelCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/ui/dialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ui/dialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/redux/reelSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/reelSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Feed.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Feed.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/LeftSidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/LeftSidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Post.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Post.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Posts.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Posts.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/RightSidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/RightSidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/SuggestedUsers.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SuggestedUsers.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +56,7 @@
     "javascript.nodejs.core.library.configured.version": "22.17.1",
     "javascript.nodejs.core.library.typings.version": "22.17.1",
     "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "E:/instagram_clone",
+    "last_opened_file_path": "E:/instagram_clone/frontend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -75,6 +78,12 @@
         <entry key="com.intellij.reactbuddy.storybook" value="false" />
       </map>
     </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\instagram_clone\frontend" />
+      <recent name="E:\instagram_clone" />
+    </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -153,7 +162,7 @@
       <workItem from="1754924487789" duration="319000" />
       <workItem from="1754924943577" duration="133000" />
       <workItem from="1755099263914" duration="63000" />
-      <workItem from="1755099352191" duration="1693000" />
+      <workItem from="1755099352191" duration="31322000" />
     </task>
     <servers />
   </component>
